@@ -6,6 +6,8 @@ from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Flatten, MaxPooling3D, Flatten
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.layers import Conv1D, Conv3D
+import matplotlib.pyplot as plt
+import matplotlib as mpl
 
 def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
     if isinstance(data, list):
@@ -103,3 +105,12 @@ def LSTM_model(train_X, train_y, test_X, test_y):
     # fit network
     model.fit(train_X, train_y, epochs=25, batch_size=8, validation_data=(test_X, test_y),verbose=2, shuffle=False)
     return model
+
+def plot_train_test_loss(model):
+    mpl.rcParams['figure.figsize'] = (12, 8)
+    mpl.rcParams['axes.grid'] = False
+    # plot history
+    plt.plot(model.history.history['loss'], label='train')
+    plt.plot(model.history.history['val_loss'], label='test')
+    plt.legend()
+    plt.show()

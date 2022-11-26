@@ -57,6 +57,8 @@ test_y = np.load('datasets/test_y.npy')
 
 # Step 1: Train the model on the original dataset
 model = model_training.LSTM_model(train_X, train_y, test_X, test_y)
+# print(model.summary())
+model_training.plot_train_test_loss(model)
 
 # Step 2: Calculate the DFBETA and RMSE values for each instance
 # This steps requires re-training the original model on the dataset without the one instance at a time, in order to calculate its significance
