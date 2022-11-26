@@ -33,8 +33,8 @@ data_3 = data.interpolate()
 data_without_nan = data.fillna(0)
 df = data_without_nan
 
-new_dataframe = model_training.series_to_supervised(df, 1, 1)
-print(new_dataframe.head())
+new_df = model_training.series_to_supervised(df, 1, 1)
+print(new_df.head())
 # Step 1: Train the model on the original dataset
 
 
