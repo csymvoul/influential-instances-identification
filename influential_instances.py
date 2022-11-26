@@ -1,5 +1,7 @@
 # Import libraries 
 import numpy as np
+import pandas as pd 
+import model_training
 
 """
     The steps needed to train an AI model based on the influential instances are:
@@ -14,7 +16,25 @@ import numpy as np
         6. The centroids of the K-Means algorithm are the influential instances
         7. We cluster the original dataset based on the centroids of the K-Means algorithm and we produce a new final dataset, which we use to re-train the model 
 """
+# Use this colab: https://colab.research.google.com/drive/1ap1MW33o29WS_lNLcIzmP4-AN1r6p5pN#scrollTo=ReK99rIz7AY-
 
+# Step 0: Download dataset and pre-process it
+url='https://raw.githubusercontent.com/jenfly/opsd/master/opsd_germany_daily.csv'
+data = pd.read_csv(url,sep=",")
+
+data = data.set_index('Date')
+data.head()
+data.isnull().sum()
+
+data_2 = data.dropna()
+
+data_3 = data.interpolate()
+
+data_without_nan = data.fillna(0)
+df = data_without_nan
+
+new_dataframe = model_training.series_to_supervised(df, 1, 1)
+print(new_dataframe.head())
 # Step 1: Train the model on the original dataset
 
 
